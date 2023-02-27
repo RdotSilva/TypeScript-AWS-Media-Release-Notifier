@@ -9,13 +9,18 @@ stack_name = "media-release-notifier"
 
 [default.build]
 [default.build.parameters]
+cached = true
 parallel = true
 
 [default.deploy]
 [default.deploy.parameters]
 capabilities = "CAPABILITY_IAM"
 confirm_changeset = true
-resolve_image_repos = true
+resolve_s3 = true
+
+[default.package]
+[default.package.parameters]
+resolve_s3 = true
 
 [default.sync]
 [default.sync.parameters]
