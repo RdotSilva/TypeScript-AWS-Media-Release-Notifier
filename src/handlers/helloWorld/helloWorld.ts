@@ -1,4 +1,5 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import axios from 'axios';
 
 /**
  *
@@ -10,23 +11,31 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
  *
  */
 
-export const lambdaHandler = async (
-  event: APIGatewayProxyEvent
-): Promise<APIGatewayProxyResult> => {
-  try {
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: "hello world",
-      }),
-    };
-  } catch (err) {
-    console.log(err);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        message: "some error happened",
-      }),
-    };
-  }
+export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+    try {
+        const data = await getCatData();
+
+        console.log(data);
+
+        return {
+            statusCode: 200,
+            body: JSON.stringify({
+                message: data,
+            }),
+        };
+    } catch (err) {
+        console.log(err);
+        return {
+            statusCode: 500,
+            body: JSON.stringify({
+                message: 'some error happened',
+            }),
+        };
+    }
+};
+
+const getCatData = async () => {
+    const catUrl = 'https://cat-fact.herokuapp.com/facts';
+    const response = await axios.get(catUrl);
+    return response;
 };
