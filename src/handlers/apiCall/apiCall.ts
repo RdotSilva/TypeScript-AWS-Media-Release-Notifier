@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import axios from 'axios';
+import { getCatData, getWebCodeData } from '../../services/catDataService/getCatData';
 
 /**
  *
@@ -11,11 +11,9 @@ import axios from 'axios';
  *
  */
 
-export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
         const data = await getCatData();
-
-        console.log(data);
 
         return {
             statusCode: 200,
@@ -32,10 +30,4 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
             }),
         };
     }
-};
-
-const getCatData = async () => {
-    const catUrl = 'https://cat-fact.herokuapp.com/facts';
-    const response = await axios.get(catUrl);
-    return response;
 };
