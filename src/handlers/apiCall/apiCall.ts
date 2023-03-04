@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { getCatData, getWebCodeData } from '../../services/catDataService/getCatData';
+import { getCatData } from './services/getCatDataService';
 
 /**
  *
