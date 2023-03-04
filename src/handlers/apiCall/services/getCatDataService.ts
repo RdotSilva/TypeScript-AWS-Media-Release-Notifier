@@ -22,15 +22,3 @@ export const getCatData = async () => {
         throw new Error(`Unable to fetch data: ${error}`);
     }
 };
-
-export const getWebCodeData = async () => {
-    const config = {
-        method: 'get',
-        url: 'http://webcode.me',
-    };
-
-    let res = await axios(config);
-
-    console.log(res);
-    return res;
-};
