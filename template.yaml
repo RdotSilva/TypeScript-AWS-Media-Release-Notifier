@@ -9,6 +9,12 @@ Globals:
     Function:
         Timeout: 3
 
+Parameters:
+    ApiKey:
+        Type: String
+        Description: API Key
+        Default: 'test'
+
 Resources:
     ApiCallFunction:
         Type: AWS::Serverless::Function
@@ -16,6 +22,9 @@ Resources:
             CodeUri: src/handlers/apiCall
             Handler: apiCall.lambdaHandler
             Runtime: nodejs18.x
+            Environment:
+                Variables:
+                    API_KEY: !Ref ApiKey
             Architectures:
                 - x86_64
             Events:
