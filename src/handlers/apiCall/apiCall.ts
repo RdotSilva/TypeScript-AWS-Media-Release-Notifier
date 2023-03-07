@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { getCatData } from './services/getCatDataService';
+import { getMovieData } from './services/getMovieData';
 
 /**
  *
@@ -13,7 +13,7 @@ import { getCatData } from './services/getCatDataService';
 
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
-        const data = await getCatData();
+        const data = await getMovieData();
 
         return {
             statusCode: 200,
