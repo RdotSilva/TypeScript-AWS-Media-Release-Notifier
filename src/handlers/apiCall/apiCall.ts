@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { getMovieData } from './services/getMovieData';
+import { getMovieData, getUpcomingMovies } from './services/getMovieData';
 
 /**
  *
@@ -13,7 +13,7 @@ import { getMovieData } from './services/getMovieData';
 
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
-        const data = await getMovieData();
+        const data = await getUpcomingMovies();
 
         return {
             statusCode: 200,
