@@ -35,7 +35,7 @@ export const getUpcomingMovies = async () => {
     try {
         const { data } = await axios(axiosConfig);
         console.log(`Data from getUpcomingMovies: ${data}`);
-        return data;
+        return data.results;
     } catch (error: any) {
         console.log(error);
         throw new Error(`Unable to fetch data: ${error}`);
