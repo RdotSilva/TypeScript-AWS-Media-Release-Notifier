@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { filterMoviesByGenre } from '../utils/movies/filterMovies';
 
 export const getMovieData = async () => {
     const baseURL = 'https://api.themoviedb.org';
@@ -34,8 +35,13 @@ export const getUpcomingMovies = async () => {
 
     try {
         const { data } = await axios(axiosConfig);
-        console.log(`Data from getUpcomingMovies: ${data}`);
-        return data.results;
+        console.log(`Data from getUpcomingMovies: ${JSON.stringify(data)}`);
+        const allUpcomingMovies = data.results;
+
+        const filteredByGenre = filterMoviesByGenre(18, allUpcomingMovies);
+
+        console.log(`filteredByGenre from getUpcomingMovies: ${JSON.stringify(filteredByGenre)}`);
+        return filteredByGenre;
     } catch (error: any) {
         console.log(error);
         throw new Error(`Unable to fetch data: ${error}`);
