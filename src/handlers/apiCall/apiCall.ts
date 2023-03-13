@@ -13,7 +13,11 @@ import { getMovieData, getUpcomingMovies } from './services/getMovieData';
 
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
-        const data = await getUpcomingMovies();
+        const genre: string = event.pathParameters?.genre ?? '';
+
+        console.log(`lambdaHandler genre: ${JSON.stringify(genre)}`);
+
+        const data = await getUpcomingMovies(genre);
 
         return {
             statusCode: 200,
