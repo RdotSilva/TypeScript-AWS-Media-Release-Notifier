@@ -1,4 +1,4 @@
-export interface GenreType {
+export interface Genres {
     action: number;
     adventure: number;
     animation: number;
@@ -19,7 +19,7 @@ export interface GenreType {
     war: number;
     western: number;
 }
-export const genres: GenreType = {
+export const genres: Genres = {
     action: 28,
     adventure: 12,
     animation: 16,
