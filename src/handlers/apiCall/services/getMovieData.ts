@@ -39,7 +39,8 @@ export const getUpcomingMovies = async (genre: any) => {
     try {
         const { data } = await axios(axiosConfig);
         const allUpcomingMovies = data.results;
-        const filteredByGenre = filterMoviesByGenre(genreType, allUpcomingMovies);
+        // TODO: Remove hard coded genres and pass them in from event
+        const filteredByGenre = filterMoviesByGenre([16, 23], allUpcomingMovies);
         return filteredByGenre;
     } catch (error: any) {
         console.log(error);
