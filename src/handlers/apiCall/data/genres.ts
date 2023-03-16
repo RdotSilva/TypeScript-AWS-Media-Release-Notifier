@@ -19,7 +19,7 @@ export interface Genres {
     war: number;
     western: number;
 }
-export const genres: Genres = {
+export const genreList: Genres = {
     action: 28,
     adventure: 12,
     animation: 16,
