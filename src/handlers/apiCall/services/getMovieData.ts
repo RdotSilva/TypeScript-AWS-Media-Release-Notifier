@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { Genres, genres } from '../data/genres';
+import { Genres, genreList } from '../data/genres';
 import { filterMoviesByGenre } from '../utils/movies/filterMovies';
 
 export const getMovieData = async () => {
@@ -23,7 +23,7 @@ export const getMovieData = async () => {
     }
 };
 
-export const getUpcomingMovies = async (genre: any) => {
+export const getUpcomingMovies = async (incomingGenres: any) => {
     const baseURL = 'https://api.themoviedb.org';
 
     const axiosConfig: AxiosRequestConfig = {
@@ -33,14 +33,23 @@ export const getUpcomingMovies = async (genre: any) => {
             api_key: process.env.API_KEY,
         },
     };
+    // TODO: Look into bug, incomingGenres is coming in as a string, not an array
 
-    const genreType: any = genres[genre as keyof Genres];
+    console.log(`incomingGenres: ${JSON.stringify(incomingGenres)}`);
+
+    const genreTypes = incomingGenres.map((genre: any) => {
+        genreList[genre as keyof Genres];
+    });
+
+    console.log(`genreTypes: ${JSON.stringify(genreTypes)}`);
+
+    // const genreType: any = genres[genre as keyof Genres];
 
     try {
         const { data } = await axios(axiosConfig);
         const allUpcomingMovies = data.results;
         // TODO: Remove hard coded genres and pass them in from event
-        const filteredByGenre = filterMoviesByGenre([16, 23], allUpcomingMovies);
+        const filteredByGenre = filterMoviesByGenre(genreTypes, allUpcomingMovies);
         return filteredByGenre;
     } catch (error: any) {
         console.log(error);
