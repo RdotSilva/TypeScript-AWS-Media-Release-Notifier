@@ -37,7 +37,11 @@ export const getUpcomingMovies = async (incomingGenres: any) => {
 
     console.log(`incomingGenres: ${JSON.stringify(incomingGenres)}`);
 
-    const genreTypes = incomingGenres.map((genre: any) => {
+    const parsedGenres = JSON.parse(incomingGenres);
+
+    console.log(`parsedGenres: ${parsedGenres}`);
+
+    const genreTypes = parsedGenres.map((genre: any) => {
         genreList[genre as keyof Genres];
     });
 
