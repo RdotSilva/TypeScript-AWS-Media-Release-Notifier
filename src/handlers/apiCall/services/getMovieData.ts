@@ -33,15 +33,15 @@ export const getUpcomingMovies = async (incomingGenres: []) => {
             api_key: process.env.API_KEY,
         },
     };
-    // TODO: Look into bug, incomingGenres is coming in as a string, not an array
 
-    // const genreType: any = genres[genre as keyof Genres];
+    const genreCodes = incomingGenres.map((genreName: string) => genreList[genreName as keyof Genres]);
 
     try {
         const { data } = await axios(axiosConfig);
         const allUpcomingMovies = data.results;
-        // TODO: Remove hard coded genres and pass them in from event
-        return allUpcomingMovies;
+
+        const filteredByGenre = filterMoviesByGenre(genreCodes, allUpcomingMovies);
+        return filteredByGenre;
     } catch (error: any) {
         console.log(error);
         throw new Error(`Unable to fetch data: ${error}`);
