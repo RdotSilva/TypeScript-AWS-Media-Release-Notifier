@@ -23,7 +23,7 @@ export const getMovieData = async () => {
     }
 };
 
-export const getUpcomingMovies = async (incomingGenres: any) => {
+export const getUpcomingMovies = async (incomingGenres: []) => {
     const baseURL = 'https://api.themoviedb.org';
 
     const axiosConfig: AxiosRequestConfig = {
@@ -35,26 +35,13 @@ export const getUpcomingMovies = async (incomingGenres: any) => {
     };
     // TODO: Look into bug, incomingGenres is coming in as a string, not an array
 
-    console.log(`incomingGenres: ${JSON.stringify(incomingGenres)}`);
-
-    const parsedGenres = JSON.parse(incomingGenres);
-
-    console.log(`parsedGenres: ${parsedGenres}`);
-
-    const genreTypes = parsedGenres.map((genre: any) => {
-        genreList[genre as keyof Genres];
-    });
-
-    console.log(`genreTypes: ${JSON.stringify(genreTypes)}`);
-
     // const genreType: any = genres[genre as keyof Genres];
 
     try {
         const { data } = await axios(axiosConfig);
         const allUpcomingMovies = data.results;
         // TODO: Remove hard coded genres and pass them in from event
-        const filteredByGenre = filterMoviesByGenre(genreTypes, allUpcomingMovies);
-        return filteredByGenre;
+        return allUpcomingMovies;
     } catch (error: any) {
         console.log(error);
         throw new Error(`Unable to fetch data: ${error}`);
