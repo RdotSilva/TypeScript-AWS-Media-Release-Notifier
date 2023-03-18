@@ -19,6 +19,10 @@ export interface Genres {
     war: number;
     western: number;
 }
+
+/**
+ * Mapping of genre IDs from https://developers.themoviedb.org/3/genres/get-movie-list
+ */
 export const genreList: Genres = {
     action: 28,
     adventure: 12,
