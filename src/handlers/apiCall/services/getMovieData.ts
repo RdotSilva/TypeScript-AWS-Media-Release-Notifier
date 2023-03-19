@@ -23,7 +23,12 @@ export const getMovieData = async () => {
     }
 };
 
-export const getUpcomingMovies = async (incomingGenres: []) => {
+/**
+ * Get a list of upcoming movies filtered by specific genres
+ * @param incomingGenres The genres you want to filter
+ * @returns All upcoming movies filtered by genres
+ */
+export const getUpcomingMoviesByGenres = async (incomingGenres: []) => {
     const baseURL = 'https://api.themoviedb.org';
 
     const axiosConfig: AxiosRequestConfig = {
