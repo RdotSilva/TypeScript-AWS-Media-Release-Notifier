@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { Genres, genreList } from '../data/genres';
-import { filterMoviesByGenre } from '../utils/movies/filterMovies';
+import { filterMoviesByFutureDate, filterMoviesByGenre } from '../utils/movies/filterMovies';
 
 export const getMovieData = async () => {
     const baseURL = 'https://api.themoviedb.org';
@@ -44,9 +44,9 @@ export const getUpcomingMoviesByGenres = async (incomingGenres: []) => {
     try {
         const { data } = await axios(axiosConfig);
         const allUpcomingMovies = data.results;
-
         const filteredByGenre = filterMoviesByGenre(genreCodes, allUpcomingMovies);
-        return filteredByGenre;
+        const filteredByReleaseDate = filterMoviesByFutureDate(filteredByGenre);
+        return filteredByReleaseDate;
     } catch (error: any) {
         console.log(error);
         throw new Error(`Unable to fetch data: ${error}`);
