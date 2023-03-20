@@ -3,8 +3,12 @@ export const filterMoviesByGenre = (genres: number[], movies: any): any => {
     return moviesByGenre;
 };
 
-export const filterMoviesByFutureDate = (movieDate: any) => {
-    const givenDate = new Date(movieDate);
+export const filterMoviesByFutureDate = (movies: any) => {
     const currentDate = new Date();
-    return givenDate.getTime() > currentDate.getTime();
+    const moviesInFuture = movies.filter((movie: any) => {
+        const givenDate = new Date(movie.release_date);
+        const isInFuture = givenDate.getTime() > currentDate.getTime();
+        return isInFuture;
+    });
+    return moviesInFuture;
 };
