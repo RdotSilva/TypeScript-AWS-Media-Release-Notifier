@@ -1,7 +1,7 @@
 import { Movie } from '../../types/movie';
 
-export const filterMoviesByGenre = (genres: number[], movies: any): any => {
-    const moviesByGenre = movies.filter((movie: any) => genres.some((genre) => movie.genre_ids.includes(genre)));
+export const filterMoviesByGenre = (genres: number[], movies: Movie[]): any => {
+    const moviesByGenre = movies.filter((movie: Movie) => genres.some((genre) => movie.genre_ids.includes(genre)));
     return moviesByGenre;
 };
 
@@ -12,7 +12,7 @@ export const filterMoviesByGenre = (genres: number[], movies: any): any => {
  */
 export const filterMoviesByFutureDate = (movies: Movie[]) => {
     const currentDate = new Date();
-    const moviesInFuture = movies.filter((movie: any) => {
+    const moviesInFuture = movies.filter((movie: Movie) => {
         const givenDate = new Date(movie.release_date);
         const isInFuture = givenDate.getTime() > currentDate.getTime();
         return isInFuture;
