@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { getUpcomingMoviesByGenres } from './services/getMovieData';
+import { getUpcomingMoviesByGenres } from './services/getUpcomingMovies';
 
 /**
  *
