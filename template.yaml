@@ -16,11 +16,11 @@ Parameters:
         Default: 'test'
 
 Resources:
-    ApiCallFunction:
+    GetUpcomingMoviesFunction:
         Type: AWS::Serverless::Function
         Properties:
-            CodeUri: src/handlers/apiCall
-            Handler: apiCall.lambdaHandler
+            CodeUri: src/handlers/getUpcomingMovies
+            Handler: getUpcomingMovies.lambdaHandler
             Runtime: nodejs18.x
             Environment:
                 Variables:
@@ -31,7 +31,7 @@ Resources:
                 HelloWorld:
                     Type: Api
                     Properties:
-                        Path: /apiCall
+                        Path: /getUpcomingMovies
                         Method: get
         Metadata:
             BuildMethod: esbuild
@@ -40,7 +40,7 @@ Resources:
                 Target: 'es2020'
                 Sourcemap: true
                 EntryPoints:
-                    - apiCall.ts
+                    - getUpcomingMovies.ts
 
 Outputs:
     HelloWorldApi:
@@ -48,7 +48,7 @@ Outputs:
         Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/'
     ApiCallFunction:
         Description: 'ApiCall Lambda Function ARN'
-        Value: !GetAtt ApiCallFunction.Arn
+        Value: !GetAtt GetUpcomingMoviesFunction.Arn
     ApiCallFunctionIamRole:
         Description: 'Implicit IAM Role created for Api Call function'
-        Value: !GetAtt ApiCallFunctionRole.Arn
+        Value: !GetAtt GetUpcomingMoviesFunction.Arn
