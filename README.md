@@ -26,6 +26,12 @@ Run this command to build the application and run a new local api using the `env
 npm start
 ```
 
+## Endpoints
+
+`/getUpcomingMovies`
+
+Fetch upcoming movies based on genres.
+
 ## Deploy the sample application
 
 The Serverless Application Model Command Line Interface (SAM CLI) is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
