@@ -7,7 +7,9 @@ import { Movie } from '../../types/movie';
  * @returns An array of movies filtered by genres
  */
 export const filterMoviesByGenre = (genres: number[], movies: Movie[]): any => {
-    const moviesByGenre = movies.filter((movie: Movie) => genres.some((genre) => movie.genre_ids.includes(genre)));
+    const moviesByGenre = movies.filter((movie: Movie) =>
+        genres.some((genre: number) => movie.genre_ids.includes(genre)),
+    );
     return moviesByGenre;
 };
 
