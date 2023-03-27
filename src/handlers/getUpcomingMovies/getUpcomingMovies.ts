@@ -19,6 +19,8 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
 
         const data = await getUpcomingMoviesByGenres(genres);
 
+        // TODO: Send email containing data
+
         return {
             statusCode: 200,
             body: JSON.stringify({
