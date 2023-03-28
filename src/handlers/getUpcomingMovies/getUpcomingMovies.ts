@@ -1,5 +1,8 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { getUpcomingMoviesByGenres } from './services/getUpcomingMovies';
+import { CloneReceiptRuleSetCommand } from '@aws-sdk/client-ses';
+
+import { sesClient } from './libs/sesClient';
 
 /**
  * Fetch upcoming movies based on genres
@@ -10,6 +13,23 @@ import { getUpcomingMoviesByGenres } from './services/getUpcomingMovies';
 
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     let genres;
+
+    // SES logic
+    const params = {
+        Destination: {
+            ToAddresses: ['todo@todo.com'],
+        },
+        // Interpolate the data in the strings to send
+        Message: {
+            Body: {
+                Text: {
+                    Data: `New Release Data Goes Here`,
+                },
+            },
+            Subject: { Data: `Release Notifier - New Release Found!` },
+        },
+        Source: 'todo@todo.com',
+    };
 
     try {
         if (event.body) {
