@@ -1,6 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { getUpcomingMoviesByGenres } from './services/getUpcomingMovies';
-import { CloneReceiptRuleSetCommand } from '@aws-sdk/client-ses';
+import { CloneReceiptRuleSetCommand, SendEmailCommand } from '@aws-sdk/client-ses';
 
 import { sesClient } from './libs/sesClient';
 
@@ -30,6 +30,14 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
         },
         Source: 'todo@todo.com',
     };
+
+    const sendCommand = new SendEmailCommand(params);
+
+    try {
+        await sesClient.send(sendCommand);
+    } catch (error) {
+        console.log(`Unable to send email: ${JSON.stringify(error)}`);
+    }
 
     try {
         if (event.body) {
