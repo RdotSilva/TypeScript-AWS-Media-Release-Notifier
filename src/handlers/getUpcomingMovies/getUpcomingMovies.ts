@@ -4,6 +4,8 @@ import { CloneReceiptRuleSetCommand, SendEmailCommand } from '@aws-sdk/client-se
 
 import { sesClient } from './libs/sesClient';
 
+const { SOURCE_EMAIL } = process.env;
+
 /**
  * Fetch upcoming movies based on genres
  * @param {Object} event - API Gateway Lambda Proxy Input Format
@@ -28,7 +30,7 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
             },
             Subject: { Data: `Release Notifier - New Release Found!` },
         },
-        Source: 'todo@todo.com',
+        Source: SOURCE_EMAIL,
     };
 
     const sendCommand = new SendEmailCommand(params);
