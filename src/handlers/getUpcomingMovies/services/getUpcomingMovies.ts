@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { Genres, genreList } from '../data/genres';
 import { filterMoviesByFutureDate, filterMoviesByGenre } from '../utils/movies/filterMovies';
+import { baseURL, upcomingMoviePath } from '../constants';
 
 /**
  * Get a list of upcoming movies filtered by specific genres
@@ -8,11 +9,9 @@ import { filterMoviesByFutureDate, filterMoviesByGenre } from '../utils/movies/f
  * @returns All upcoming movies filtered by genres
  */
 export const getUpcomingMoviesByGenres = async (incomingGenres: []) => {
-    const baseURL = 'https://api.themoviedb.org';
-
     const axiosConfig: AxiosRequestConfig = {
         method: 'get',
-        url: `${baseURL}/3/movie/upcoming`,
+        url: `${baseURL}/${upcomingMoviePath}`,
         params: {
             api_key: process.env.API_KEY,
         },
