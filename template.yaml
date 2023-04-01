@@ -25,6 +25,9 @@ Resources:
             Environment:
                 Variables:
                     API_KEY: !Ref ApiKey
+            Policies:
+                - SESCrudPolicy:
+                      IdentityName: #TODO Add ARN for identity
             Architectures:
                 - x86_64
             Events:
