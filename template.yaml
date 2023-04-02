@@ -3,7 +3,7 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
     media-release-notifier
 
-    Sample SAM Template for media-release-notifier
+    Get email notifications for new media releases based on the genres you select.
 
 Globals:
     Function:
