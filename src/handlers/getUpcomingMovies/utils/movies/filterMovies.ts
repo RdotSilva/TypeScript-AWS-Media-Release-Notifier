@@ -27,3 +27,10 @@ export const filterMoviesByFutureDate = (movies: Movie[]) => {
     });
     return moviesInFuture;
 };
+
+export const filterMediaByType = (media: any[], mediaType: string) => {
+    const mediaByType = media.filter((media: any) => {
+        media.type === mediaByType;
+    });
+    return mediaByType;
+};
