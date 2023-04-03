@@ -14,7 +14,6 @@
         "start": "sam build && sam local start-api --warm-containers EAGER --log-file sam-log.log --env-vars env.json"
     },
     "dependencies": {
-        "@aws-sdk/client-ses": "^3.301.0",
         "axios": "^1.3.4",
         "esbuild": "^0.14.14"
     },
