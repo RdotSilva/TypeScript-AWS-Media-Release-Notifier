@@ -16,7 +16,11 @@ npm install
 cp env.sample.json env.json
 ```
 
-2. Populate the API KEY parameter with your API key
+Populate the env variables based on the example.
+
+1. API_KEY - TMDB API key
+2. SOURCE_EMAIL - The AWS verified email to send from
+3. REGION - The region for your AWS app
 
 ## Running the application
 
