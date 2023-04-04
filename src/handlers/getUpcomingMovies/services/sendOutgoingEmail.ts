@@ -21,6 +21,9 @@ const params = {
     Source: SOURCE_EMAIL,
 };
 
+/**
+ * Send an outgoing email using SES
+ */
 export const sendOutgoingEmail = async () => {
     const sendCommand = new SendEmailCommand(params);
 
