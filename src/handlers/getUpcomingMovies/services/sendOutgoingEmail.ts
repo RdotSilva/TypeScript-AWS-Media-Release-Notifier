@@ -21,6 +21,27 @@ const params = {
     Source: SOURCE_EMAIL,
 };
 
+const generateEmailCommand = (email: string, subject: string, body: string) => {
+    const params = {
+        Destination: {
+            ToAddresses: [email],
+        },
+        // Interpolate the data in the strings to send
+        Message: {
+            Body: {
+                Text: {
+                    Data: body,
+                },
+            },
+            Subject: { Data: subject },
+        },
+        Source: SOURCE_EMAIL,
+    };
+};
+
+/**
+ * Send an outgoing email using SES
+ */
 export const sendOutgoingEmail = async () => {
     const sendCommand = new SendEmailCommand(params);
 
