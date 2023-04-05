@@ -1,10 +1,11 @@
 import { SendEmailCommand, SendEmailCommandInput } from '@aws-sdk/client-ses';
 
 import { sesClient } from '../libs/sesClient';
+import { emailSubject } from '../constants';
 
 const { SOURCE_EMAIL } = process.env;
 
-const generateEmailCommand = (email: string, subject: string, body: string): SendEmailCommandInput => {
+const generateEmailCommand = (email: string, body: string): SendEmailCommandInput => {
     const params = {
         Destination: {
             ToAddresses: [email],
@@ -16,7 +17,7 @@ const generateEmailCommand = (email: string, subject: string, body: string): Sen
                     Data: body,
                 },
             },
-            Subject: { Data: subject },
+            Subject: { Data: emailSubject },
         },
         Source: SOURCE_EMAIL,
     };
@@ -24,7 +25,7 @@ const generateEmailCommand = (email: string, subject: string, body: string): Sen
     return params;
 };
 
-const params = generateEmailCommand('todo@todo.com', 'New Release Subject', 'New Release Body');
+const params = generateEmailCommand('todo@todo.com', 'New Release Body');
 
 /**
  * Send an outgoing email using SES
