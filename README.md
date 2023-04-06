@@ -21,6 +21,7 @@ Populate the env variables based on the example.
 1. API_KEY - TMDB API key
 2. SOURCE_EMAIL - The AWS verified email to send from
 3. REGION - The region for your AWS app
+4. SES_ARN - The ARN for SES for a verified email account
 
 ## Running the application
 
