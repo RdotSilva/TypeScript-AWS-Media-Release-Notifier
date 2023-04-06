@@ -8,7 +8,7 @@ const { SOURCE_EMAIL } = process.env;
 const generateEmailCommand = (email: string, body: string): SendEmailCommandInput => {
     const params = {
         Destination: {
-            ToAddresses: [email],
+            ToAddresses: [SOURCE_EMAIL!],
         },
         // Interpolate the data in the strings to send
         Message: {
@@ -19,7 +19,7 @@ const generateEmailCommand = (email: string, body: string): SendEmailCommandInpu
             },
             Subject: { Data: emailSubject },
         },
-        Source: SOURCE_EMAIL,
+        Source: email,
     };
 
     return params;
