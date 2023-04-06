@@ -14,6 +14,10 @@ Parameters:
         Type: String
         Description: API Key
         Default: 'test'
+    SesArn:
+        Type: String
+        Description: SES ARN
+        Default: 'test'
 
 Resources:
     GetUpcomingMoviesFunction:
@@ -25,9 +29,10 @@ Resources:
             Environment:
                 Variables:
                     API_KEY: !Ref ApiKey
+                    SES_ARN: !Ref SesArn
             Policies:
                 - SESCrudPolicy:
-                      IdentityName: #TODO Add ARN for identity
+                      IdentityName: !Ref SesArn
             Architectures:
                 - x86_64
             Events:
