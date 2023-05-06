@@ -18,6 +18,10 @@ Parameters:
         Type: String
         Description: SES ARN
         Default: 'test'
+    UserTable:
+        Type: String
+        Description: DynamoDB Table Name
+        Default: 'UserTable'
 
 Resources:
     DynamoDBTable:
@@ -30,7 +34,8 @@ Resources:
                 - AttributeName: id
                   KeyType: HASH
             BillingMode: PAY_PER_REQUEST
-            TableName: UserTable
+            TableName: !Ref UserTable
+
     GetUpcomingMoviesFunction:
         Type: AWS::Serverless::Function
         Properties:
