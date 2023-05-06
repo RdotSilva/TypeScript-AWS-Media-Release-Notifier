@@ -36,6 +36,22 @@ Resources:
             BillingMode: PAY_PER_REQUEST
             TableName: !Ref UserTable
 
+    UpdateUserOptionsFunction:
+        Type: 'AWS::Serverless::Function'
+        Properties:
+            CodeUri: src/handlers/updateUserOptions
+            Handler: updateUserOptions.lambdaHandler
+            Runtime: nodejs18.x
+            Events:
+                UpdateUserOptions:
+                Type: Api
+                Properties:
+                    Path: /updateUserOptions
+                    Method: post
+            Environment:
+                Variables:
+                    DYNAMODB_TABLE: !Ref DynamoDBTable
+
     GetUpcomingMoviesFunction:
         Type: AWS::Serverless::Function
         Properties:
