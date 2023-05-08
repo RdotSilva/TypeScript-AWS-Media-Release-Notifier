@@ -17,26 +17,7 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
         };
     }
 
-    try {
-        const params = {
-            TableName: process.env.DYNAMODB_TABLE,
-            Item: {
-                id: uuid.v1(),
-                name: data.name,
-                description: data.description,
-            },
-        };
+    const res = await updateUser(data);
 
-        await dynamo.put(params).promise();
-
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ message: 'User options updated successfully' }),
-        };
-    } catch (error) {
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ message: 'Error updating user options' }),
-        };
-    }
+    return res;
 };
