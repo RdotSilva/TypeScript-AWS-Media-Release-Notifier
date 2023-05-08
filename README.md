@@ -1,5 +1,7 @@
 # media-release-notifier
 
+This is the backend for Media Release Notifier.
+
 ## Setup
 
 ### Install dependencies
