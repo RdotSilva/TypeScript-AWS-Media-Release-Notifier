@@ -4,25 +4,57 @@ const uuid = require('uuid');
 const dynamo = new AWS.DynamoDB.DocumentClient();
 
 const updateUser = async (data: any) => {
+    const userId = data.userId || uuid.v1();
+
     const params = {
         TableName: process.env.DYNAMODB_TABLE,
-        Item: {
-            id: uuid.v1(),
-            name: data.name,
-            description: data.description,
+        Key: {
+            userId,
         },
     };
 
     try {
-        await dynamo.put(params).promise();
+        let result = await dynamo.get(params).promise();
+
+        if (result.Item) {
+            // user exists, update record
+            const updateParams = {
+                TableName: process.env.DYNAMODB_TABLE,
+                Key: {
+                    userId,
+                },
+                UpdateExpression: 'set #g = :genres',
+                ExpressionAttributeNames: {
+                    '#g': 'genres',
+                },
+                ExpressionAttributeValues: {
+                    ':genres': data.genres,
+                },
+            };
+
+            await dynamo.update(updateParams).promise();
+        } else {
+            // user doesn't exist, create new record
+            const createParams = {
+                TableName: process.env.DYNAMODB_TABLE,
+                Item: {
+                    userId,
+                    genres: data.genres,
+                },
+                ConditionExpression: 'attribute_not_exists(userId)',
+            };
+
+            await dynamo.put(createParams).promise();
+        }
+
         return {
             statusCode: 200,
-            body: JSON.stringify({ message: 'User options updated successfully' }),
+            body: JSON.stringify({ message: 'User added/updated successfully' }),
         };
-    } catch (error) {
+    } catch (err) {
         return {
             statusCode: 500,
-            body: JSON.stringify({ message: 'Error updating user options' }),
+            body: JSON.stringify({ message: 'Error adding/updating user' }),
         };
     }
 };
