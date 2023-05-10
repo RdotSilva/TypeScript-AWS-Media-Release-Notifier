@@ -1,4 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import { updateUser } from './services/updateUser';
 
 const AWS = require('aws-sdk');
 const uuid = require('uuid');
