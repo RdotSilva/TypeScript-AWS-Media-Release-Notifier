@@ -1,10 +1,10 @@
 const AWS = require('aws-sdk');
-const uuid = require('uuid');
+import { v4 as uuidv4 } from 'uuid';
 
 const dynamo = new AWS.DynamoDB.DocumentClient();
 
 const updateUser = async (data: any) => {
-    const userId = data.userId || uuid.v1();
+    const userId = data.userId || uuidv4();
 
     const params = {
         TableName: process.env.DYNAMODB_TABLE,
