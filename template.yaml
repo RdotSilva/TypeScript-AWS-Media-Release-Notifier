@@ -44,10 +44,10 @@ Resources:
             Runtime: nodejs18.x
             Events:
                 UpdateUserOptions:
-                Type: Api
-                Properties:
-                    Path: /updateUserOptions
-                    Method: post
+                    Type: Api
+                    Properties:
+                        Path: /updateUserOptions
+                        Method: post
             Environment:
                 Variables:
                     DYNAMODB_TABLE: !Ref DynamoDBTable
