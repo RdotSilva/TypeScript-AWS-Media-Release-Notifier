@@ -29,6 +29,8 @@ Populate the env variables based on the example.
 
 Run this command to build the application and run a new local api using the `env.json` file.
 
+1. Ensure you have Docker Desktop running
+
 ```bash
 npm start
 ```
