@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const dynamo = new AWS.DynamoDB.DocumentClient();
 
-const updateUser = async (data: any) => {
+export const updateUser = async (data: any) => {
     const userId = data.userId || uuidv4();
 
     const params = {
