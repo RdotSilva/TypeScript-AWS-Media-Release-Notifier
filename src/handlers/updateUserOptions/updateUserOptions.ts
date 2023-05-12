@@ -20,5 +20,8 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
 
     const res = await updateUser(data);
 
-    return res;
+    return {
+        statusCode: 200,
+        body: res.body,
+    };
 };
