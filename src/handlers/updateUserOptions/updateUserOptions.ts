@@ -2,9 +2,6 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { updateUser } from './services/updateUser';
 
 const AWS = require('aws-sdk');
-const uuid = require('uuid');
-
-const dynamo = new AWS.DynamoDB.DocumentClient();
 
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     let data;
